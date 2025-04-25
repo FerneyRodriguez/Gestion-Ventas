@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ordenado/components/input_user.dart';
 import 'package:ordenado/components/principal_button.dart';
+import 'package:ordenado/pages/main_page.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -39,7 +40,7 @@ class Login extends StatelessWidget {
                 const Text('¿Olvidaste la contraseña?', style: TextStyle(fontSize: 18),),
                 const SizedBox(height: 20,),
                 PrincipalButton(
-                  oprimir: () => debugPrint('Oprimiendo boton'),
+                  oprimir: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(),)),
                   textoDentro: 'Ingresar',
                   colorBoton: Colors.black,
                   dimesiones: Size(250, 50),
