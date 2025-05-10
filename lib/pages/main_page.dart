@@ -6,17 +6,17 @@ class MainPage extends StatelessWidget {
 
   final valorEnv = const String.fromEnvironment('API_KEY');
 
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true,
-      onPopInvokedWithResult: (didPop, result) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(),)),
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(),)), // Con esta propiedad permite ir hacia atrás sin que se cierre la aplicación
       child: Scaffold(
         appBar: AppBar(
+          title: Text('Manejo de inventario'),
           centerTitle: true,
-          title: const Text('Manejo del minimercado'),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         body: Center(
           child: Text('Valor variable de entorno: $valorEnv'),
         ),
