@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ordenado/pages/login.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+  MainPage({super.key});
 
-  final valorEnv = const String.fromEnvironment('API_KEY');
+  // * Consulta principal
+  final valorStreams = Supabase.instance.client.from('usuario').stream(primaryKey: ['rol_usuario']);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +18,74 @@ class MainPage extends StatelessWidget {
           title: Text('Manejo de inventario'),
           centerTitle: true,
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        body: Center(
-          child: Text('Valor variable de entorno: $valorEnv'),
+        body: Column(
+          children: [
+            ConstruirDatos(
+              valorStreams: valorStreams,
+              runtimeType: runtimeType
+            ),
+          ],
         ),
       ),
+    );
+  }
+}
+
+// * La construcción de los datos obtenidos
+class ConstruirDatos extends StatelessWidget {
+  const ConstruirDatos({
+    super.key,
+    required this.valorStreams,
+    required this.runtimeType,
+  });
+
+  final SupabaseStreamFilterBuilder valorStreams;
+  @override
+  final Type runtimeType;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: valorStreams,
+      builder: (context, snapshot) {
+        if(!snapshot.hasData){
+          return Text('No hay valor de momento');
+        }
+    
+        final productos = snapshot.data!;
+        debugPrint('Tipo de dato: ${productos.runtimeType}');
+        String nombre = productos[0]['nombre'];
+        debugPrint('Nombre: $nombre');
+    
+        return Center(
+          child: Container(
+            color: Colors.amber,
+            width: 550,
+            height: 500,
+            child: ListView.builder(
+              itemCount: productos.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 100.0,right: 100.0),
+                    child: Container(
+                      color: Colors.blueAccent,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("Nombre: ${productos[index]['nombre']}"),
+                          Text("Contraseña: ${productos[index]['contraseña']}"),
+                          Text("Rol: ${productos[index]['rol_usuario']}")
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
