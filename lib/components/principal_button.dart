@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PrincipalButton extends StatelessWidget {
-  final String textoDentro;
+  final Widget widgetDentro;
   final Color colorBoton;
   final Size dimesiones;
   final Function()? oprimir;
 
   const PrincipalButton({
     super.key,
-    required this.textoDentro,
+    required this.widgetDentro,
     required this.colorBoton,
     required this.dimesiones,
     required this.oprimir,
@@ -25,10 +25,7 @@ class PrincipalButton extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
       ),
-      child: Text(
-        textoDentro,
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
+      child: widgetDentro,
     );
   }
 }

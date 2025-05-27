@@ -16,56 +16,76 @@ class Login extends StatelessWidget {
       top: false,
       child: Scaffold(
         backgroundColor: Colors.blueGrey.shade200,
-        body: SingleChildScrollView( // ! Con el scrollview no aparece el overflow
+        body: SingleChildScrollView(
+          // ! Con el scrollview no aparece el overflow
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 150,),
-                const Icon(Icons.shield, size: 100,),
-                const SizedBox(height: 50,),
+                const SizedBox(height: 150),
+                const Icon(Icons.shield, size: 100),
+                const SizedBox(height: 50),
                 const Text('Inicio de sesión', style: TextStyle(fontSize: 24)),
-                const SizedBox(height: 50,),
+                const SizedBox(height: 50),
                 InputUser(
                   controller: controladorUsuario,
                   textoAyuda: 'Usuario',
                   textoOscuro: false,
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(height: 20),
                 InputUser(
                   controller: controladorContrasena,
                   textoAyuda: 'Contraseña',
                   textoOscuro: true,
                 ),
-                const SizedBox(height: 20,),
-                const Text('¿Olvidaste la contraseña?', style: TextStyle(fontSize: 18),),
-                const SizedBox(height: 20,),
+                InputUser(
+                  controller: controladorUsuario,
+                  textoAyuda: 'Rol',
+                  textoOscuro: false,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  '¿Olvidaste la contraseña?',
+                  style: TextStyle(fontSize: 18),
+                ),
+                const SizedBox(height: 20),
                 PrincipalButton(
-                  oprimir: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(),)),
-                  textoDentro: 'Ingresar',
+                  oprimir:
+                      () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      ),
+                  widgetDentro: Text('Ingresar'),
                   colorBoton: Colors.black,
                   dimesiones: Size(250, 50),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
+                    const SizedBox(width: 15),
                     Text('¿No tienes cuenta?'),
-                    Padding( // * Puse el padding para ayudar a que se vea un poco más centrado
+                    Padding(
+                      // * Puse el padding para ayudar a que se vea un poco más centrado
                       padding: const EdgeInsets.only(left: 10),
                       child: ElevatedButton(
-                        onPressed: () => debugPrint('Ingresando para crear cuenta'),
+                        onPressed:
+                            () => debugPrint('Ingresando para crear cuenta'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueGrey.shade200,
-                          elevation: 0
+                          elevation: 0,
                         ),
-                        child: Text('Ingresa aquí', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), textAlign: TextAlign.center,)
+                        child: Text(
+                          'Ingresa aquí',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),

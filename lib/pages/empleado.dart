@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               PrincipalButton(
-                textoDentro: 'Venta',
+                widgetDentro: Text('Venta'),
                 colorBoton: Colors.yellow,
                 dimesiones: Size(150, 100),
                 oprimir: () {},
               ),
               PrincipalButton(
-                textoDentro: 'Producto',
+                widgetDentro: Text('Producto'),
                 colorBoton: Colors.yellow,
                 dimesiones: Size(150, 100),
                 oprimir: () {},
